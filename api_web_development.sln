@@ -1,23 +1,23 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32616.157
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "api_web_development", "api_web_development\api_web_development.pyproj", "{1765BA63-8B2F-494B-9490-B98E89BB3F0E}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1765BA63-8B2F-494B-9490-B98E89BB3F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1765BA63-8B2F-494B-9490-B98E89BB3F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {92CF270A-8909-4B66-A8D5-8D3DE8047AA5}
-	EndGlobalSection
-EndGlobal
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Welcome to the API!"
+
+@app.route("/api/add", methods=["POST"])
+def add():
+    # Get the two numbers to add from the request body
+    data = request.get_json()
+    num1 = data["num1"]
+    num2 = data["num2"]
+    
+    # Calculate the sum of the two numbers
+    result = num1 + num2
+    
+    # Return the result as JSON
+    return {"result": result}
+
+if __name__ == "__main__":
+    app.run()
